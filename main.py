@@ -6,7 +6,6 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def process():
-    return "Hello"
     headers = dict(request.headers)
     data = request.get_data()
     cookies = dict(request.cookies)
@@ -20,7 +19,7 @@ def process():
         data = request.args
 
     response = requests.post("http://example.com/api", json=data)
-    result = response.json()
+    # result = response.json()
 
     print(f"Server response: {result}")
 
