@@ -1,6 +1,5 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, Response
 import requests
-from requests.auth import HTTPBasicAuth
 
 
 app = Flask(__name__)
@@ -14,9 +13,11 @@ def proxy():
     # Вывод заголовков
     print("Заголовки запроса:")
     headers = dict(request.headers)
-    h = ''
+    h = dict()
     if 'Authorization' in headers:
         h = {'Authorization': headers['Authorization']}
+    if 'Cookie' in headers:
+        h['Cookie'] = headers['Cookie']
     print(headers)
 
     # Вывод текстового содержимого
@@ -34,17 +35,24 @@ def proxy():
         print("GET параметры:")
         args = request.args.to_dict()
         print(args)
-        res = requests.get(other_server_url, headers=h, params=args)
+        res = requests.get(other_server_url, headers=h, params=args, cookies=cookies)
     elif request.method == 'POST':
         # Вывод содержимого POST
         print("POST параметры:")
-        args = request.form.to_dict()
+        args = request.args.to_dict()
         print(args)
-        res = requests.post(other_server_url, headers=h, params=args, data=data)
+        res = requests.post(other_server_url, headers=h, params=args, data=data, cookies=cookies)
 
-    print(f'Response from remote server: {res.text}')
+    cookies = dict(res.cookies)
+    print(f'\nОтвет текст: {res.text}')
+    print(f'Заголовок: {res.headers}')
+    print(f'Куки: {cookies}\n')
 
+    print('----------------------------------------------------------------\n')
     response = Response(res, res.status_code)
+    for cookie_name, cookie_value in cookies.items():
+        response.set_cookie(cookie_name, cookie_value)
+
     return response
 
 
