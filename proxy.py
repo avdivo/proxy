@@ -6,9 +6,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def proxy():
+    print(' ------------------------------ Вход ------------------------------')
     other_server_url = 'https://store.tilda.cc/connectors/commerceml'
-
-    data = request.get_data()
 
     # Вывод заголовков
     print("Заголовки запроса:")
