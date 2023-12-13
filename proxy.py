@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/store.tilda.cc/connectors/commerceml', methods=['GET', 'POST'])
 def proxy():
     print(' ------------------------------ Вход ------------------------------')
     other_server_url = 'https://store.tilda.cc/connectors/commerceml'
