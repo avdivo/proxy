@@ -32,13 +32,13 @@ def proxy():
 
     if request.method == 'GET':
         # Вывод содержимого GET
-        print("GET параметры:")
+        print("Метод GET:")
         args = request.args.to_dict()
         print(args)
         res = requests.get(other_server_url, headers=h, params=args, cookies=cookies)
     elif request.method == 'POST':
         # Вывод содержимого POST
-        print("POST параметры:")
+        print("Метод POST")
         args = request.args.to_dict()
         print(args)
         res = requests.post(other_server_url, headers=h, params=args, data=data, cookies=cookies)
