@@ -45,7 +45,7 @@ def proxy():
 
     # Вывод текстового содержимого
     print("Текстовое содержимое:")
-    data = request.get_data()
+    data = request.data
     print(data)
 
     # Вывод cookies
