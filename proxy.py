@@ -47,7 +47,7 @@ def proxy():
 
     # Вывод текстового содержимого
     print("Текстовое содержимое:")
-    data = request.data.decode('UTF-8', errors='replace')
+    data = request.data.decode('cp1251', errors='replace')
     print(data)
 
 
