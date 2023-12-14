@@ -56,13 +56,13 @@ def proxy():
         print("Метод GET:")
         args = request.args.to_dict()
         print(args)
-        res = requests.get(other_server_url, headers=h, params=args, cookies=cookies)
+        res = requests.get(other_server_url, headers=headers, params=args, cookies=cookies)
     elif request.method == 'POST':
         # Вывод содержимого POST
         print("Метод POST")
         args = request.args.to_dict()
         print(args)
-        res = requests.post(other_server_url, headers=h, params=args, data=data, cookies=cookies)
+        res = requests.post(other_server_url, headers=headers, params=args, data=data, cookies=cookies)
 
     cookies = dict(res.cookies)
     print(f'\nОтвет текст: {res.text}')
