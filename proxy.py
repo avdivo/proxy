@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, request, Response
 import requests
 import sys
@@ -47,6 +49,8 @@ def proxy():
     print("Текстовое содержимое:")
     data = request.data
     print(data)
+
+    time.sleep(10)
 
     # Вывод cookies
     print("Куки:")
