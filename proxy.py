@@ -39,6 +39,8 @@ def proxy():
         h = {'Authorization': headers['Authorization']}
     if 'Cookie' in headers:
         h['Cookie'] = headers['Cookie']
+
+    headers['Host'] = 'store.tilda.cc'
     print(headers)
 
     # Вывод текстового содержимого
