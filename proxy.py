@@ -47,10 +47,9 @@ def proxy():
 
     # Вывод текстового содержимого
     print("Текстовое содержимое:")
-    data = request.data
+    data = request.data.decode(encoding='utf-8')
     print(data)
 
-    time.sleep(10)
 
     # Вывод cookies
     print("Куки:")
