@@ -1,5 +1,27 @@
 from flask import Flask, request, Response
 import requests
+import sys
+import datetime
+
+class Tee:
+    def __init__(self):
+        self.file = open('log.txt', 'a')
+        self.stdout = sys.stdout
+        sys.stdout = self
+
+    def write(self, message):
+        self.file.write(message)
+        self.stdout.write(message)
+
+    def flush(self):
+        self.file.flush()
+        self.stdout.flush()
+
+    def close(self):
+        if self.file:
+            sys.stdout = self.stdout
+            self.file.close()
+            self.file = None
 
 
 app = Flask(__name__)
@@ -56,4 +78,9 @@ def proxy():
 
 
 if __name__ == "__main__":
+    tee = Tee()
+    print(datetime.date.today(), datetime.datetime.now().time())
+
     app.run(debug=True)
+
+    tee.close()
