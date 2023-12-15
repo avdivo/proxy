@@ -38,7 +38,7 @@ def proxy():
         out = []
         for k, v in args.items():
             if k == 'filename':
-                k = 'one.xml'
+                v = 'one.xml'
             out.append(f'{k}={v}')
         return '?' + '&'.join(out)
 
