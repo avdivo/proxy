@@ -30,6 +30,13 @@ app = Flask(__name__)
 
 @app.route('/store.tilda.cc/connectors/commerceml', methods=['GET', 'POST'])
 def proxy():
+    # Переделываем аргументы для присоединения к строке (как GET)
+    def in_str(args):
+        if not args:
+            return ''
+        return '?' + '&'.join(f'{k}={v}' for k, v in args.items())
+
+
     print(' ------------------------------ Вход ------------------------------')
     other_server_url = 'https://store.tilda.cc/connectors/commerceml'
 
@@ -60,15 +67,17 @@ def proxy():
         # Вывод содержимого GET
         print("Метод GET:")
         args = request.args.to_dict()
+        args = in_str(args)
         print(args)
-        res = requests.get(other_server_url, headers=headers, params=args, cookies=cookies)
+        res = requests.get(other_server_url + args, headers=headers, cookies=cookies)
     elif request.method == 'POST':
         # Вывод содержимого POST
         print("Метод POST")
         args = request.args.to_dict()
+        args = in_str(args)
         print(args)
-        res = requests.post(other_server_url, headers=headers, params=args, data=data, cookies=cookies)
-    print('Form', request.form)
+        res = requests.post(other_server_url + args, headers=headers, data=data, cookies=cookies)
+
 
     cookies = dict(res.cookies)
     print(f'\nОтвет текст: {res.text}')
