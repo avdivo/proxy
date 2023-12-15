@@ -65,6 +65,7 @@ def proxy():
     elif request.method == 'POST':
         # Вывод содержимого POST
         print("Метод POST")
+        print('Form', request.form)
         args = request.args.to_dict()
         print(args)
         res = requests.post(other_server_url, headers=headers, params=args, data=data, cookies=cookies)
