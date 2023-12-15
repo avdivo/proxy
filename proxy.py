@@ -34,8 +34,13 @@ def proxy():
     def in_str(args):
         if not args:
             return ''
-        return '?' + '&'.join(f'{k}={v}' for k, v in args.items())
-
+        # return '?' + '&'.join(f'{k}={v}' for k, v in args.items())
+        out = []
+        for k, v in args.items():
+            if k == 'filename':
+                k = 'one.xml'
+            out.append(f'{k}={v}')
+        return '?' + '&'.join(out)
 
     print(' ------------------------------ Вход ------------------------------')
     other_server_url = 'https://store.tilda.cc/connectors/commerceml'
