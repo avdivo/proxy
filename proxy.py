@@ -40,15 +40,25 @@ def proxy():
     other_server_url = 'https://store.tilda.cc/connectors/commerceml'
 
     # Вывод заголовков
-    print("Заголовки запроса:")
-    headers = dict(request.headers)
-    h = dict()
-    if 'Authorization' in headers:
-        h = {'Authorization': headers['Authorization']}
-    if 'Cookie' in headers:
-        h['Cookie'] = headers['Cookie']
+    # print("Заголовки запроса:")
+    # headers = dict(request.headers)
+    # h = dict()
+    # if 'Authorization' in headers:
+    #     h = {'Authorization': headers['Authorization']}
+    # if 'Cookie' in headers:
+    #     h['Cookie'] = headers['Cookie']
+    #
+    # headers['Host'] = 'store.tilda.cc'
 
-    headers['Host'] = 'store.tilda.cc'
+    headers = {
+        'Host': 'store.tilda.cc',
+        'User-Agent': '1C+Enterprise/8.2',
+        'Authorization': 'Basic NzM2MjI3MjoyN2MwZDliNzNkNDViNjliYTgwZWJhOTI0M2I2YjI0OA==',
+        'Cookie': 'PHPSESSID=tcenu5dgmt61ju5enupjfhkqjb',
+        'Content-Type': 'application/xml',
+        'Cache-Control': 'no-cache',
+        'Accept': 'text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2'
+    }
     print(headers)
 
     # Вывод текстового содержимого
